@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS — Псевдоклассы и псевдоэлементы</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            font-size: 42px;
+        }
+
+        header p {
+            margin: 0;
+            color: #cbd5e1;
+            font-size: 18px;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 30px;
+            color: #111827;
+        }
+
+        h3 {
+            margin-bottom: 8px;
+            color: #374151;
+        }
+
+        .definition {
+            padding: 15px 20px;
+            border-left: 5px solid #6366f1;
+            background: #eef2ff;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            background: #fafafa;
+        }
+
+        .card code,
+        .example code {
+            display: block;
+            background: #111827;
+            color: #e5e7eb;
+            padding: 14px;
+            border-radius: 8px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            font-family: Consolas, monospace;
+            white-space: pre;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 13px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background: #f3f4f6;
+        }
+
+        td code {
+            background: #e5e7eb;
+            padding: 3px 6px;
+            border-radius: 5px;
+        }
+
+        /* Демо псевдоклассов */
+
+        .demo-button {
+            border: none;
+            background: #6366f1;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .demo-button:hover {
+            background: #4338ca;
+        }
+
+        .demo-button:active {
+            transform: scale(0.95);
+        }
+
+        .demo-input {
+            padding: 12px;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .demo-input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px #e0e7ff;
+        }
+
+        .list li:first-child {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        .list li:last-child {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .list li:nth-child(2) {
+            color: #2563eb;
+        }
+
+        /* Демо псевдоэлементов */
+
+        .quote {
+            position: relative;
+            padding: 20px 40px;
+            background: #f3f4f6;
+            border-radius: 10px;
+        }
+
+        .quote::before {
+            content: "“";
+            font-size: 50px;
+            color: #6366f1;
+            position: absolute;
+            left: 10px;
+            top: 0;
+        }
+
+        .quote::after {
+            content: "”";
+            font-size: 50px;
+            color: #6366f1;
+            position: absolute;
+            right: 10px;
+            bottom: -15px;
+        }
+
+        .title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #6366f1;
+            margin-top: 8px;
+            border-radius: 10px;
+        }
+
+        .important {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .difference {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .difference-card {
+            padding: 24px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            background: #fafafa;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+
+        }
+
+        .difference-card h3 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        .symbol {
+            font-family: Consolas, monospace;
+            font-size: 32px;
+            font-weight: bold;
+            color: #6366f1;
+        }
+
+        .memory {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #eef2ff;
+            border-left: 5px solid #6366f1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #6b7280;
+        }
+
+        @media (max-width: 700px) {
+            header h1 {
+                font-size: 32px;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            .difference {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>CSS-памятка</h1>
+        <p>Псевдоклассы и псевдоэлементы</p>
+    </header>
+
+    <main>
+
+        <!-- ПСЕВДОКЛАССЫ -->
+
+        <section>
+            <h2>🔹 Псевдоклассы</h2>
+
+            <div class="definition">
+                <strong>Псевдокласс</strong> — это ключевое слово, которое
+                добавляется к селектору и позволяет выбрать элемент в зависимости
+                от его состояния, положения или других условий.
+            </div>
+
+            <div class="example">
+                <h3>Синтаксис</h3>
+                <code>селектор:pseudo-class {
+  свойство: значение;
+}</code>
+            </div>
+
+            <h3>Состояние элемента</h3>
+
+            <div class="grid">
+
+                <div class="card">
+                    <strong>:hover</strong>
+                    <p>Когда курсор находится над элементом.</p>
+                    <code>button:hover {
+  background: blue;
+}</code>
+                </div>
+
+                <div class="card">
+                    <strong>:active</strong>
+                    <p>Когда элемент нажат.</p>
+                    <code>button:active {
+  transform: scale(.95);
+}</code>
+                </div>
+
+                <div class="card">
+                    <strong>:focus</strong>
+                    <p>Когда элемент получил фокус.</p>
+                    <code>input:focus {
+  border-color: blue;
+}</code>
+                </div>
+
+                <div class="card">
+                    <strong>:visited</strong>
+                    <p>Ссылка, которую пользователь уже посещал.</p>
+                    <code>a:visited {
+  color: purple;
+}</code>
+                </div>
+
+                <div class="card">
+                    <strong>:link</strong>
+                    <p>Непосещённая ссылка.</p>
+                    <code>a:link {
+  color: blue;
+}</code>
+                </div>
+
+                <div class="card">
+                    <strong>:disabled</strong>
+                    <p>Отключённый элемент формы.</p>
+                    <code>button:disabled {
+  opacity: .5;
+}</code>
+                </div>
+
+            </div>
+
+            <h3>Выбор элементов по положению</h3>
+
+            <div class="grid">
+
+                <div class="card">
+                    <strong>:first-child</strong>
+                    <p>Первый дочерний элемент.</p>
+                    <code>li:first-child {
+  color: red;
+}</code>
+                </div>
+
+                <div class="card">
+                    <strong>:last-child</strong>
+                    <p>Последний дочерний элемент.</p>
+                    <code>li:last-child {
+  color: red;
+}</code>
+                </div>
+
+                <div class="card">
+                    <strong>:nth-child()</strong>
+                    <p>Элемент с определённым номером.</p>
+                    <code>li:nth-child(2) {
+  color: blue;
+}</code>
+                </div>
+
+                <div class="card">
+                    <strong>:nth-child(odd)</strong>
+                    <p>Нечётные элементы.</p>
+                    <code>li:nth-child(odd) {
+  background: #eee;
+}</code>
+                </div>
+
+                <div class="card">
+                    <strong>:nth-child(even)</strong>
+                    <p>Чётные элементы.</p>
+                    <code>li:nth-child(even) {
+  background: #eee;
+}</code>
+                </div>
+
+                <div class="card">
+                    <strong>:not()</strong>
+                    <p>Все элементы, кроме указанных.</p>
+                    <code>p:not(.important) {
+  color: gray;
+}</code>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ПСЕВДОЭЛЕМЕНТЫ -->
+
+        <section>
+            <h2>🔸 Псевдоэлементы</h2>
+
+            <div class="definition">
+                <strong>Псевдоэлемент</strong> позволяет стилизовать определённую
+                часть элемента или создать виртуальный элемент, которого нет
+                непосредственно в HTML.
+            </div>
+
+            <div class="example">
+                <h3>Синтаксис</h3>
+                <code>селектор::pseudo-element {
+  свойство: значение;
+}</code>
+            </div>
+
+            <div class="grid">
+
+                <div class="card">
+                    <strong>::before</strong>
+                    <p>Добавляет виртуальный элемент перед содержимым.</p>
+                    <code>.title::before {
+  content: "★";
+}</code>
+                </div>
+
+                <div class="card">
+                    <strong>::after</strong>
+                    <p>Добавляет виртуальный элемент после содержимого.</p>
+                    <code>.title::after {
+  content: "";
+  display: block;
+  height: 3px;
+}</code>
+                </div>
+
+                <div class="card">
+                    <strong>::first-letter</strong>
+                    <p>Стилизует первую букву текста.</p>
+                    <code>p::first-letter {
+  font-size: 2em;
+}</code>
+                </div>
+
+                <div class="card">
+                    <strong>::first-line</strong>
+                    <p>Стилизует первую строку текста.</p>
+                    <code>p::first-line {
+  font-weight: bold;
+}</code>
+                </div>
+
+                <div class="card">
+                    <strong>::selection</strong>
+                    <p>Стилизует текст, который пользователь выделил.</p>
+                    <code>::selection {
+  background: yellow;
+}</code>
+                </div>
+
+                <div class="card">
+                    <strong>::placeholder</strong>
+                    <p>Стилизует placeholder поля ввода.</p>
+                    <code>input::placeholder {
+  color: gray;
+}</code>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ГЛАВНОЕ ОТЛИЧИЕ -->
+
+        <section>
+            <h2>⚡ Главное отличие</h2>
+
+            <div class="difference">
+
+                <div class="difference-card">
+                    <div class="symbol">:</div>
+
+                    <h3>Псевдокласс</h3>
+
+                    <p>
+                        Псевдокласс описывает
+                        <strong>состояние, положение или условие выбора элемента</strong>.
+                    </p>
+
+                    <code>:hover
+:focus
+:first-child</code>
+
+                    <ul>
+                        <li><code>:hover</code> — курсор наведен на элемент.</li>
+                        <li><code>:focus</code> — элемент находится в фокусе.</li>
+                        <li><code>:first-child</code> — элемент является первым дочерним.</li>
+                    </ul>
+                </div>
+
+
+                <div class="difference-card">
+                    <div class="symbol">::</div>
+
+                    <h3>Псевдоэлемент</h3>
+
+                    <p>
+                        Псевдоэлемент позволяет
+                        <strong>обратиться к определённой части элемента
+                            или создать виртуальный элемент</strong>.
+                    </p>
+
+                    <code>::before
+::after
+::first-letter</code>
+
+                    <ul>
+                        <li><code>::before</code> — добавляет содержимое перед содержимым элемента.</li>
+                        <li><code>::after</code> — добавляет содержимое после содержимого элемента.</li>
+                        <li><code>::first-letter</code> — стилизует первую букву текста.</li>
+                    </ul>
+                </div>
+
+            </div>
+
+
+            <!-- ДЕМО -->
+
+            <section>
+                <h2>🎯 Мини-демо</h2>
+
+                <h3 class="title">Псевдоклассы в действии</h3>
+
+                <p>Наведи курсор на кнопку:</p>
+
+                <button class="demo-button">
+                    Наведи на меня
+                </button>
+
+                <p>Кликни на поле:</p>
+
+                <input class="demo-input" type="text" placeholder="Поле с :focus">
+
+                <h3>Псевдоклассы :first-child, :nth-child() и :last-child</h3>
+
+                <ul class="list">
+                    <li>Первый элемент</li>
+                    <li>Второй элемент</li>
+                    <li>Третий элемент</li>
+                    <li>Последний элемент</li>
+                </ul>
+
+                <h3>Псевдоэлементы ::before и ::after</h3>
+
+                <div class="quote">
+                    Псевдоэлементы позволяют добавить декоративное содержимое
+                    без изменения HTML.
+                </div>
+            </section>
+
+
+            <!-- ШПАРГАЛКА -->
+
+            <section>
+                <h2>📌 Быстрая шпаргалка</h2>
+
+                <table>
+                    <tr>
+                        <th>Селектор</th>
+                        <th>Что делает</th>
+                    </tr>
+
+                    <tr>
+                        <td><code>:hover</code></td>
+                        <td>Курсор наведен</td>
+                    </tr>
+
+                    <tr>
+                        <td><code>:active</code></td>
+                        <td>Элемент нажат</td>
+                    </tr>
+
+                    <tr>
+                        <td><code>:focus</code></td>
+                        <td>Элемент в фокусе</td>
+                    </tr>
+
+                    <tr>
+                        <td><code>:first-child</code></td>
+                        <td>Первый дочерний элемент</td>
+                    </tr>
+
+                    <tr>
+                        <td><code>:last-child</code></td>
+                        <td>Последний дочерний элемент</td>
+                    </tr>
+
+                    <tr>
+                        <td><code>:nth-child()</code></td>
+                        <td>Элемент по номеру</td>
+                    </tr>
+
+                    <tr>
+                        <td><code>:not()</code></td>
+                        <td>Все элементы, кроме указанных</td>
+                    </tr>
+
+                    <tr>
+                        <td><code>::before</code></td>
+                        <td>Перед содержимым</td>
+                    </tr>
+
+                    <tr>
+                        <td><code>::after</code></td>
+                        <td>После содержимого</td>
+                    </tr>
+
+                    <tr>
+                        <td><code>::first-letter</code></td>
+                        <td>Первая буква</td>
+                    </tr>
+
+                    <tr>
+                        <td><code>::first-line</code></td>
+                        <td>Первая строка</td>
+                    </tr>
+
+                    <tr>
+                        <td><code>::selection</code></td>
+                        <td>Выделенный текст</td>
+                    </tr>
+
+                    <tr>
+                        <td><code>::placeholder</code></td>
+                        <td>Текст placeholder</td>
+                    </tr>
+                </table>
+            </section>
+
+    </main>
+
+    <footer>
+        CSS Cheat Sheet · Псевдоклассы & псевдоэлементы
+    </footer>
+
+</body>
+
+</html>
