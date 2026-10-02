@@ -268,6 +268,184 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* ===== ИНТЕРАКТИВНОЕ ДЕМО ===== */
+
+        .demo-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .demo-panel {
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 22px;
+            background: #fafafa;
+        }
+
+        .demo-panel h3 {
+            margin-top: 0;
+        }
+
+        .demo-item {
+            margin-bottom: 25px;
+        }
+
+        .demo-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .demo-item-title {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        /* Кнопки */
+
+        .demo-button {
+            border: none;
+            background: #6366f1;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: .15s;
+        }
+
+        .demo-button:hover {
+            background: #4338ca;
+        }
+
+        .demo-button:active {
+            transform: scale(.95);
+            background: #312e81;
+        }
+
+        /* Поле */
+
+        .demo-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .demo-input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px #e0e7ff;
+        }
+
+        /* Ссылка */
+
+        .demo-link {
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .demo-link:visited {
+            color: #7c3aed;
+        }
+
+        /* Disabled */
+
+        .demo-disabled {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: not-allowed;
+            opacity: .5;
+        }
+
+        /* Список */
+
+        .demo-list {
+            padding-left: 25px;
+        }
+
+        .demo-list li {
+            padding: 5px;
+            cursor: default;
+        }
+
+        .demo-list li:first-child {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        .demo-list li:nth-child(2) {
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .demo-list li:last-child {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+
+        /* ===== CSS-КОД ===== */
+
+        .code-demo {
+            margin: 0;
+            padding: 20px;
+            background: #111827;
+            color: #e5e7eb;
+            border-radius: 10px;
+            font-family: Consolas, monospace;
+            font-size: 15px;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            display: block;
+            padding: 2px 8px;
+            margin: 0;
+        }
+
+        .code-line.active-line {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .selector-code {
+            color: #93c5fd;
+        }
+
+        .property-code {
+            color: #f9a8d4;
+        }
+
+        .value-code {
+            color: #86efac;
+        }
+
+
+        /* Информация о выбранной демке */
+
+        .demo-status {
+            margin-top: 20px;
+            padding: 12px 15px;
+            background: #eef2ff;
+            border-left: 4px solid #6366f1;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+
+        /* Адаптация */
+
+        @media (max-width: 700px) {
+            .demo-layout {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
@@ -539,37 +717,163 @@
             <!-- ДЕМО -->
 
             <section>
-                <h2>🎯 Мини-демо</h2>
+                <h2>🎯 Псевдоклассы в действии</h2>
 
-                <h3 class="title">Псевдоклассы в действии</h3>
+                <div class="definition">
+                    Наведи курсор, нажми на кнопку или выбери элемент.
+                    Справа подсветится CSS-код, который отвечает за соответствующее состояние.
+                </div>
 
-                <p>Наведи курсор на кнопку:</p>
+                <div class="demo-layout">
 
-                <button class="demo-button">
-                    Наведи на меня
-                </button>
+                    <!-- Левая часть — интерактивные элементы -->
 
-                <p>Кликни на поле:</p>
+                    <div class="demo-panel">
 
-                <input class="demo-input" type="text" placeholder="Поле с :focus">
+                        <h3>Демонстрация</h3>
 
-                <h3>Псевдоклассы :first-child, :nth-child() и :last-child</h3>
+                        <div class="demo-item">
+                            <span class="demo-item-title">:hover</span>
 
-                <ul class="list">
-                    <li>Первый элемент</li>
-                    <li>Второй элемент</li>
-                    <li>Третий элемент</li>
-                    <li>Последний элемент</li>
-                </ul>
+                            <button class="demo-button" id="hoverButton">
+                                Наведи на меня
+                            </button>
+                        </div>
 
-                <h3>Псевдоэлементы ::before и ::after</h3>
 
-                <div class="quote">
-                    Псевдоэлементы позволяют добавить декоративное содержимое
-                    без изменения HTML.
+                        <div class="demo-item">
+                            <span class="demo-item-title">:active</span>
+
+                            <button class="demo-button" id="activeButton">
+                                Нажми и удерживай
+                            </button>
+
+                            <p>
+                                💡 Удерживай кнопку мыши — состояние
+                                <code>:active</code> будет видно одновременно с подсветкой кода.
+                            </p>
+                        </div>
+
+
+                        <div class="demo-item">
+                            <span class="demo-item-title">:focus</span>
+
+                            <input class="demo-input" id="focusInput" type="text" placeholder="Кликни сюда">
+                        </div>
+
+
+                        <div class="demo-item">
+                            <span class="demo-item-title">:visited</span>
+
+                            <a class="demo-link" id="visitedLink" href="https://example.com" target="_blank">
+                                Открыть ссылку
+                            </a>
+                        </div>
+
+
+                        <div class="demo-item">
+                            <span class="demo-item-title">:disabled</span>
+
+                            <button class="demo-disabled" id="disabledButton" disabled>
+                                Отключённая кнопка
+                            </button>
+                        </div>
+
+
+                        <div class="demo-item">
+                            <span class="demo-item-title">
+                                :first-child / :nth-child() / :last-child
+                            </span>
+
+                            <ul class="demo-list">
+                                <li data-demo="first-child">
+                                    Первый элемент
+                                </li>
+
+                                <li data-demo="nth-child">
+                                    Второй элемент
+                                </li>
+
+                                <li>
+                                    Третий элемент
+                                </li>
+
+                                <li data-demo="last-child">
+                                    Последний элемент
+                                </li>
+                            </ul>
+                        </div>
+
+
+                        <div class="demo-status" id="demoStatus">
+                            Выбери элемент, чтобы увидеть соответствующий CSS-код.
+                        </div>
+
+                    </div>
+
+
+                    <!-- Правая часть — CSS -->
+
+                    <div class="demo-panel">
+
+                        <h3>CSS-код</h3>
+
+                        <pre class="code-demo">
+<span
+  class="code-line"
+  data-code="hover"
+><span class="selector-code">button:hover</span> {
+  <span class="property-code">background</span>: <span class="value-code">#4338ca</span>;
+}</span>
+<span
+  class="code-line"
+  data-code="active"
+><span class="selector-code">button:active</span> {
+  <span class="property-code">transform</span>: <span class="value-code">scale(.95)</span>;
+  <span class="property-code">background</span>: <span class="value-code">#312e81</span>;
+}</span>
+<span
+  class="code-line"
+  data-code="focus"
+><span class="selector-code">input:focus</span> {
+  <span class="property-code">border-color</span>: <span class="value-code">#6366f1</span>;
+  <span class="property-code">box-shadow</span>: <span class="value-code">0 0 0 3px #e0e7ff</span>;
+}</span>
+<span
+  class="code-line"
+  data-code="visited"
+><span class="selector-code">a:visited</span> {
+  <span class="property-code">color</span>: <span class="value-code">#7c3aed</span>;
+}</span>
+<span
+  class="code-line"
+  data-code="disabled"
+><span class="selector-code">button:disabled</span> {
+  <span class="property-code">opacity</span>: <span class="value-code">.5</span>;
+}</span>
+<span
+  class="code-line"
+  data-code="first-child"
+><span class="selector-code">li:first-child</span> {
+  <span class="property-code">color</span>: <span class="value-code">#16a34a</span>;
+}</span>
+<span
+  class="code-line"
+  data-code="nth-child"
+><span class="selector-code">li:nth-child(2)</span> {
+  <span class="property-code">color</span>: <span class="value-code">#2563eb</span>;
+}</span>
+<span
+  class="code-line"
+  data-code="last-child"
+><span class="selector-code">li:last-child</span> {
+  <span class="property-code">color</span>: <span class="value-code">#dc2626</span>;
+}</span>
+</pre>
+</div>
+
                 </div>
             </section>
-
 
             <!-- ШПАРГАЛКА -->
 
@@ -654,6 +958,180 @@
     <footer>
         CSS Cheat Sheet · Псевдоклассы & псевдоэлементы
     </footer>
+
+    <script>
+
+        const codeLines = document.querySelectorAll(".code-line");
+        const status = document.getElementById("demoStatus");
+
+
+        const descriptions = {
+            hover: ":hover — курсор находится над элементом",
+
+            active: ":active — элемент находится в момент нажатия",
+
+            focus: ":focus — элемент находится в фокусе",
+
+            visited: ":visited — ссылка уже была посещена",
+
+            disabled: ":disabled — элемент отключён",
+
+            "first-child":
+                ":first-child — элемент является первым дочерним элементом",
+
+            "nth-child":
+                ":nth-child(2) — выбирается второй дочерний элемент",
+
+            "last-child":
+                ":last-child — элемент является последним дочерним элементом"
+        };
+
+
+        function highlightCode(name) {
+
+            codeLines.forEach(line => {
+
+                line.classList.toggle(
+                    "active-line",
+                    line.dataset.code === name
+                );
+
+            });
+
+
+            if (name && descriptions[name]) {
+
+                status.textContent = descriptions[name];
+
+            } else {
+
+                status.textContent =
+                    "Выбери элемент, чтобы увидеть соответствующий CSS-код.";
+
+            }
+
+        }
+
+
+
+        const hoverButton =
+            document.getElementById("hoverButton");
+
+
+        hoverButton.addEventListener(
+            "mouseenter",
+            () => highlightCode("hover")
+        );
+
+
+        hoverButton.addEventListener(
+            "mouseleave",
+            () => highlightCode("")
+        );
+
+
+        const activeButton =
+            document.getElementById("activeButton");
+
+
+        activeButton.addEventListener(
+            "mousedown",
+            () => highlightCode("active")
+        );
+
+
+        activeButton.addEventListener(
+            "mouseup",
+            () => highlightCode("")
+        );
+
+
+        activeButton.addEventListener(
+            "mouseleave",
+            () => highlightCode("")
+        );
+
+
+        activeButton.addEventListener(
+            "touchstart",
+            () => highlightCode("active")
+        );
+
+
+        activeButton.addEventListener(
+            "touchend",
+            () => highlightCode("")
+        );
+
+
+        const focusInput =
+            document.getElementById("focusInput");
+
+
+        focusInput.addEventListener(
+            "focus",
+            () => highlightCode("focus")
+        );
+
+
+        focusInput.addEventListener(
+            "blur",
+            () => highlightCode("")
+        );
+
+
+        const visitedLink =
+            document.getElementById("visitedLink");
+
+
+        visitedLink.addEventListener(
+            "click",
+            () => highlightCode("visited")
+        );
+
+
+        const disabledButton =
+            document.getElementById("disabledButton");
+
+
+        disabledButton.addEventListener(
+            "mouseenter",
+            () => highlightCode("disabled")
+        );
+
+
+        disabledButton.addEventListener(
+            "mouseleave",
+            () => highlightCode("")
+        );
+
+
+        const listItems =
+            document.querySelectorAll(".demo-list li");
+
+
+        listItems.forEach(item => {
+
+            item.addEventListener("mouseenter", () => {
+
+                const demo = item.dataset.demo;
+
+                if (demo) {
+                    highlightCode(demo);
+                }
+
+            });
+
+
+            item.addEventListener("mouseleave", () => {
+
+                highlightCode("");
+
+            });
+
+        });
+
+    </script>
 
 </body>
 
