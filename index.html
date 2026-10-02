@@ -952,7 +952,6 @@
                     </tr>
                 </table>
             </section>
-
     </main>
 
     <footer>
@@ -960,10 +959,8 @@
     </footer>
 
     <script>
-
         const codeLines = document.querySelectorAll(".code-line");
         const status = document.getElementById("demoStatus");
-
 
         const descriptions = {
             hover: ":hover — курсор находится над элементом",
@@ -986,83 +983,64 @@
                 ":last-child — элемент является последним дочерним элементом"
         };
 
-
         function highlightCode(name) {
 
             codeLines.forEach(line => {
-
                 line.classList.toggle(
                     "active-line",
                     line.dataset.code === name
                 );
-
             });
 
-
             if (name && descriptions[name]) {
-
                 status.textContent = descriptions[name];
 
             } else {
-
                 status.textContent =
                     "Выбери элемент, чтобы увидеть соответствующий CSS-код.";
-
             }
-
         }
-
-
 
         const hoverButton =
             document.getElementById("hoverButton");
-
 
         hoverButton.addEventListener(
             "mouseenter",
             () => highlightCode("hover")
         );
 
-
         hoverButton.addEventListener(
             "mouseleave",
             () => highlightCode("")
         );
 
-
         const activeButton =
             document.getElementById("activeButton");
-
 
         activeButton.addEventListener(
             "mousedown",
             () => highlightCode("active")
         );
 
-
         activeButton.addEventListener(
             "mouseup",
             () => highlightCode("")
         );
-
 
         activeButton.addEventListener(
             "mouseleave",
             () => highlightCode("")
         );
 
-
         activeButton.addEventListener(
             "touchstart",
             () => highlightCode("active")
         );
 
-
         activeButton.addEventListener(
             "touchend",
             () => highlightCode("")
         );
-
 
         const focusInput =
             document.getElementById("focusInput");
@@ -1073,66 +1051,49 @@
             () => highlightCode("focus")
         );
 
-
         focusInput.addEventListener(
             "blur",
             () => highlightCode("")
         );
 
-
         const visitedLink =
             document.getElementById("visitedLink");
-
 
         visitedLink.addEventListener(
             "click",
             () => highlightCode("visited")
         );
 
-
         const disabledButton =
             document.getElementById("disabledButton");
-
 
         disabledButton.addEventListener(
             "mouseenter",
             () => highlightCode("disabled")
         );
 
-
         disabledButton.addEventListener(
             "mouseleave",
             () => highlightCode("")
         );
 
-
         const listItems =
             document.querySelectorAll(".demo-list li");
-
 
         listItems.forEach(item => {
 
             item.addEventListener("mouseenter", () => {
-
                 const demo = item.dataset.demo;
-
                 if (demo) {
                     highlightCode(demo);
                 }
-
             });
-
 
             item.addEventListener("mouseleave", () => {
-
                 highlightCode("");
-
             });
-
         });
 
     </script>
-
 </body>
-
 </html>
